@@ -1,3 +1,66 @@
-<p>
-  tasks works!
-</p>
+<div class="row taskapp">
+  <div class="col-md-6">
+    <div class="tasklist not-done">
+      <section class="container col-md-12">
+        <header class="header">
+          <h2>Tasks</h2>
+          <input
+            class="form-control new-task"
+            placeholder="Write a task name"
+            autofocus=""
+            [(ngModel)]="newTask.title"
+            (keyup.enter)="addTask()">
+          <input
+            class="form-control new-task"
+            placeholder="Description"
+            [(ngModel)]="newTask.description"
+            (keyup.enter)="addTask()">
+          <button id="checkAll" class="btn btn-success"
+          (click)="addTask()">Add</button>
+        </header>
+        <section class="main" *ngIf="tasks.length > 0">
+          <ul id="sortable" class="task-list list-unstyled">
+            <li *ngFor="let task of tasks" [class.completed]="task.complete" class="ui-state-default">
+              <div class="view">
+                <div class="checkbox">
+                  <label><input class="toggle" type="checkbox" (click)="toggleTaskComplete(task)" [checked]="task.complete"  value="">
+                    {{task.title}} <br/>
+                    {{task.description}}
+                  </label>
+                  <button class="destroy" (click)="removeTask(task)" ><span class="glyphicon glyphicon-remove"></span></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <footer class="footer" *ngIf="tasks.length > 0">
+          <span class="task-count"><strong>{{tasks.length}}</strong> {{tasks.length == 1 ? 'item' : 'items'}} left</span>
+        </footer>
+      </section>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="tasklist done">
+        <section class="container col-md-12">
+          <header class="header">
+            <h2>Already Done</h2>
+          </header>
+          <section>
+            <ul id="done-items" class="list-unstyled">
+                <li *ngFor="let task of tasks" [class.completed]="task.complete" class="ui-state-default">
+                  <div class="view">
+                    <div class="checkbox">
+                      <label><input class="toggle" type="checkbox" (click)="toggleTaskComplete(task)" [checked]="task.complete"  value="">
+                        {{task.title}} <br/>
+                        {{task.description}}
+                      </label>
+                      <button class="destroy" (click)="removeTask(task)" ><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                  </div>
+                </li>
+            </ul>
+          </section>
+        </section>
+    </div>
+  </div>
+</div>
