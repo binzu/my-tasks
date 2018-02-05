@@ -1,18 +1,40 @@
+
 .tasklist {
-    &.not-done {
+  // show not-done, hide done in column
+  &.not-done {
+    h2 {
+      display: inline-block;
+    }
+    .task-filters {
+      display: inline-block;
+      vertical-align: text-bottom;
+      padding-left: 20px;
+    }
     li.ui-state-default {
+      &.current {
+        input, .input-group-addon {
+          color: green;
+        }
+      }
+      &.overdue {
+        input, .input-group-addon {
+          color: red;
+        }
+      }
       &.completed {
         display: none;
       }
     }
   }
+  // show done, hide not done in column
   &.done {
     li.ui-state-default {
       display: none;
       &.completed {
         display: block;
-        input {
+        input, .input-group-addon {
           text-decoration: line-through;
+          color: #ccc;
         }
       }
     }

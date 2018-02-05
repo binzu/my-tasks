@@ -2,6 +2,7 @@
   <header>
       <h2>Enter Tasks</h2>
   </header>
+
   <!-- ENTER TASK -->
   <section class="row">
       <div class="col-md-4">
@@ -19,7 +20,7 @@
       <div class="col-md-3">
           <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">Date Due</span>
-          <input type="date" name="due" [(ngModel)]="newTask.date" class="form-control" (keyup.enter)="addTask()">
+          <input type="date" date-format="mm/dd/yyyy" placeholder="mm/dd/yyyy" name="due" [(ngModel)]="newTask.date" class="form-control" (keyup.enter)="addTask()">
           </div>
       </div>
       <div class="col-md-1">
@@ -27,13 +28,23 @@
         (click)="addTask()" [disabled]="!newTask.title">Add</button>
       </div>
   </section>
-  <section class="row">
+
+  <section class="row" d>
     <!-- TODO TASKS LIST -->
-    <div class="col-md-6">
-      <div class="main tasklist not-done">
-        <h2>Tasks</h2>
-        <ul id="sortable" class="task-list list-unstyled">
-          <li *ngFor="let task of tasks" [class.completed]="task.complete"  class="ui-state-default">
+    <div class="col-md-6 tasklist not-done" >
+      <header>
+        <h2>{{ listTitle }}</h2>
+        <div class="task-filters">
+          <label class="radio-inline"><input type="radio" value="all" name="sortradio" (change)="filterTasks($event)" checked="checked">All</label>
+          <label class="radio-inline"><input type="radio" value="current" name="sortradio" (change)="filterTasks($event)">Current</label>
+          <label class="radio-inline"><input type="radio" value="overdue" name="sortradio" (change)="filterTasks($event)">Overdue</label>
+        </div>
+      </header>
+
+      <!-- ALL -->
+      <div *ngIf="listView == 'all'">
+        <ul class="task-list list-unstyled">
+          <li *ngFor="let task of tasks" [class.completed]="task.complete"  class="ui-state-default" [ngClass]="task.status">
               <div class="input-group">
                 <span class="input-group-addon" title="Check Completed">
                   <input type="checkbox" class="toggle" type="checkbox" (click)="toggleTaskComplete(task)"
@@ -60,12 +71,75 @@
           </li>
         </ul>
       </div>
+
+      <!-- CURRENT -->
+      <div *ngIf="listView == 'current'">
+        <ul class="task-list list-unstyled">
+            <li *ngFor="let task of current" [class.completed]="task.complete"  class="ui-state-default" [ngClass]="task.status">
+                <div class="input-group">
+                  <span class="input-group-addon" title="Check Completed">
+                    <input type="checkbox" class="toggle" type="checkbox" (click)="toggleTaskComplete(task)"
+                    [checked]="task.complete"  value="">
+                  </span>
+                  <input class="form-control" placeholder="Edit task name" autofocus=""
+                    [(ngModel)]="task.title">
+                  <span class="input-group-addon" *ngIf="task.date" title="Due Date">
+                    {{task.date | date}}
+                  </span>
+                  <div class="input-group-btn">
+                    <button class="btn btn-default destroy" type="button" title="Show Description" (click)="toggleTaskDescription(task)" *ngIf="task.description">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </button>
+                    <button class="btn btn-default destroy" title="Permanently Remove Task" type="button"(click)="removeTask(task)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="alert alert-info alert-dismissible" role="alert" *ngIf="task.showDescription">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="toggleTaskDescription(task)" title="Hide Description"><span class="glyphicon glyphicon-remove"></span></button>
+                    {{task.description}}
+                </div>
+            </li>
+        </ul>
+      </div>
+
+      <!-- OVERDUE -->
+      <div *ngIf="listView == 'overdue'">
+        <ul class="task-list list-unstyled">
+            <li *ngFor="let task of overdue" [class.completed]="task.complete"  class="ui-state-default" [ngClass]="task.status">
+                <div class="input-group">
+                  <span class="input-group-addon" title="Check Completed">
+                    <input type="checkbox" class="toggle" type="checkbox" (click)="toggleTaskComplete(task)"
+                    [checked]="task.complete"  value="">
+                  </span>
+                  <input class="form-control" placeholder="Edit task name" autofocus=""
+                    [(ngModel)]="task.title">
+                  <span class="input-group-addon" *ngIf="task.date" title="Due Date">
+                    {{task.date | date}}
+                  </span>
+                  <div class="input-group-btn">
+                    <button class="btn btn-default destroy" type="button" title="Show Description" (click)="toggleTaskDescription(task)" *ngIf="task.description">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </button>
+                    <button class="btn btn-default destroy" title="Permanently Remove Task" type="button"(click)="removeTask(task)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="alert alert-info alert-dismissible" role="alert" *ngIf="task.showDescription">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="toggleTaskDescription(task)" title="Hide Description"><span class="glyphicon glyphicon-remove"></span></button>
+                    {{task.description}}
+                </div>
+            </li>
+        </ul>
+      </div>
     </div>
+
     <!-- DONE TASKS LIST -->
-    <div class="col-md-6">
-      <div class="tasklist done">
-        <h2>Done</h2>
-        <ul id="sortable" class="task-list list-unstyled">
+    <div class="col-md-6 tasklist done">
+      <h2>Done</h2>
+      <div *ngIf="tasks.length > 0">
+        <ul class="task-list list-unstyled">
           <li *ngFor="let task of tasks" [class.completed]="task.complete"  class="ui-state-default">
               <div class="input-group">
                 <span class="input-group-addon">

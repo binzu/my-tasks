@@ -7,5 +7,5 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'My Tasks App';
+  title = 'My Tasks';
 }

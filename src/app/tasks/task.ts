@@ -5,6 +5,7 @@ export class Task {
   date: Date;
   complete = false;
   showDescription = false;
+  status = 'all';
 
   constructor(values: Object = {}) {
     Object.assign(this, values);

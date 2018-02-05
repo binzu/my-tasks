@@ -53,6 +53,8 @@ import 'core-js/es7/reflect';
 // import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 
 
+/** Date input polyfill **/
+import 'date-input-polyfill/date-input-polyfill.dist';
 
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.

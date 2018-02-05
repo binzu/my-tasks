@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from './task';
 import { TaskService } from './task.service';
 
+import { Event } from '_debugger';
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -12,6 +14,8 @@ export class TasksComponent implements OnInit {
 
   newTask: Task = new Task();
   validNewTask = true;
+  listTitle = 'All Tasks';
+  listView = 'all';
 
   constructor(private taskService: TaskService) {
   }
@@ -19,7 +23,6 @@ export class TasksComponent implements OnInit {
   }
 
   addTask() {
-    console.log('task', this.newTask);
     if (!this.newTask.title) {
       this.validNewTask = false;
       return;
@@ -48,6 +51,32 @@ export class TasksComponent implements OnInit {
 
   get tasks() {
     return this.taskService.getAllTasks();
+  }
+
+  get current() {
+    return this.taskService.getCurrentTasks();
+  }
+
+  get overdue() {
+    return this.taskService.getOverdueTasks();
+  }
+
+  filterTasks(e) {
+    this.listView = e.target.value;
+    switch ( e.target['value'] ) {
+      case 'all':
+        this.listTitle = 'All Tasks';
+        break;
+      case 'current':
+        this.listTitle = 'Current Tasks';
+        break;
+      case 'overdue':
+        this.listTitle = 'Overdue Tasks';
+        break;
+      default:
+        this.listTitle = 'All Tasks';
+      }
+    }
   }
 
 }
