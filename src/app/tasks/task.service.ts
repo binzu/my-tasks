@@ -130,12 +130,4 @@ export class TaskService {
     tomorrow.setHours(23, 59, 59, 999);
     return tomorrow;
   }
-
-  // returns due date start of day based on date picker ISO string YYYY-MM-DD
-  due(iso: String): Date {
-    const due = iso.date.toString();
-    const dueArr = due.split('-');
-    return new Date(parseInt(dueArr[0], 10), parseInt(dueArr[1], 10) - 1, parseInt(dueArr[2], 10), 0, 0);
-  }
-
 }

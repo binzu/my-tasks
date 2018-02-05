@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from './task';
 import { TaskService } from './task.service';
-
-import { Event } from '_debugger';
-
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -75,8 +72,6 @@ export class TasksComponent implements OnInit {
         break;
       default:
         this.listTitle = 'All Tasks';
-      }
     }
   }
-
 }
