@@ -1,5 +1,5 @@
 # MyTasks
-An MVC tasks application built with angular-cli, angular and bootstrap 3. 
+An MVP tasks application built with angular-cli, angular and bootstrap 3. 
 
 ## Demo
 App demo can be viewed at [http://binzu-my-tasks.surge.sh/](http://binzu-my-tasks.surge.sh/)
