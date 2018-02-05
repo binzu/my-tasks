@@ -24,7 +24,7 @@ export class TaskService {
     if (!task.id) {
       task.id = ++this.lastId;
     }
-    // add status
+    // add default, current or overude status based on date of task
     if (task.date) {
       const date = task.date.toString();
       const arr = date.split('-');
@@ -80,6 +80,7 @@ export class TaskService {
     return updatedTask;
   }
 
+  // Toggle the task description in list
   toggleTaskDescription(task: Task) {
     const updatedTask = this.updateTaskById(task.id, {
       showDescription: !task.showDescription
@@ -94,10 +95,6 @@ export class TaskService {
       if (!item.date) {
         return false;
       }
-      // const date = item.date.toString();
-      // const arr = date.split('-');
-      // const due = new Date(parseInt(arr[0], 10), parseInt(arr[1], 10) - 1, parseInt(arr[2], 10), 0, 0);
-      // return due >= today  && due  <= tomorrow;
       return item.status === 'current';
     });
   }
@@ -109,10 +106,6 @@ export class TaskService {
       if (!item.date) {
         return false;
       }
-      // const date = item.date.toString();
-      // const arr = date.split('-');
-      // const due = new Date(parseInt(arr[0], 10), parseInt(arr[1], 10) - 1, parseInt(arr[2], 10), 0, 0);
-      // return due < today;
       return item.status === 'overdue';
     });
   }
