@@ -60,4 +60,10 @@ export class TaskService {
     return updatedTask;
   }
 
+  toggleTaskDescription(task: Task) {
+    const updatedTask = this.updateTaskById(task.id, {
+      showDescription: !task.showDescription
+    });
+  }
+
 }
