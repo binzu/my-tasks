@@ -15,7 +15,7 @@ App demo can be viewed at [http://binzu-my-tasks.surge.sh/](http://binzu-my-task
 * Lists existing and done tasks.
 * Task detail can be viewed by clicking info (i) button in a task with detail information.
 * Mark task as completed by clicking on the checkbox.
-* Undo marking task compleded by clicking on checkbox of task in the done list column.
+* Undo marking task completed by clicking on checkbox of task in the done list column.
 * Filter tasks to show current tasks only that are due today or tomorrow by clicking "current" radio button.
 * Filter tasks to show overdue tasks older than current day by clicking "overdue" radio button.
 * Show all tasks by clicking on "all" radio button.
