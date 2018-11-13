@@ -1,5 +1,5 @@
 # MyTasks
-An MVP tasks application built with angular-cli, angular and bootstrap 3. 
+An MVP tasks application built with angular-cli, angular
 
 ## Demo
 App demo can be viewed at [http://binzu-my-tasks.surge.sh/](http://binzu-my-tasks.surge.sh/)
@@ -8,7 +8,7 @@ App demo can be viewed at [http://binzu-my-tasks.surge.sh/](http://binzu-my-task
 [Vince Golveo](https://vincegolveo.com/)
 
 ## Framework
-* This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.6.
+* This project was generated with the latest version of [Angular CLI](https://github.com/angular/angular-cli) (7.0.5)
 * Extensive Angular CLI documentation at [https://cli.angular.io/](https://cli.angular.io/)
 ## Features
 * Create a task providing a task name (required), description and due date.
